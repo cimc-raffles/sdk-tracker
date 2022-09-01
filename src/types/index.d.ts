@@ -8,7 +8,7 @@ export interface TrackerOption {
 }
 
 export interface CustomTrackerOption extends TrackerOption {
-  url: string | TrackerUrl;
+  url?: string | TrackerUrl;
   source?: string;
   size?: number;
   vue?: any;
@@ -29,10 +29,11 @@ export interface TrackerErrorData extends TrackerData {
 
 export interface TrackerUrl {
   behavior?: string;
+  visitor?: string;
   error?: string;
   performance?: string;
 }
 
 interface TrackerUrlType {
-  type: "behavior" | "error" | "performance";
+  type: "behavior" | "visitor" | "error" | "performance";
 }

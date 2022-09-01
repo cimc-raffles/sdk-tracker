@@ -3,6 +3,7 @@ import { lazyReport } from "../services/report";
 const eventName: string = "ontouchend" in window ? "touchend" : "click";
 
 export default function onClick() {
+  // eslint-disable-next-line no-undef
   let timer: NodeJS.Timeout | null = null;
   window.addEventListener(
     eventName,

@@ -1,6 +1,6 @@
 import { TrackerData } from "../types/index";
 
-const clone = require("clone");
+import clone from "clone";
 
 const cache: TrackerData[] = [];
 

@@ -55,6 +55,7 @@ export const report = (type: TrackerUrlType, data: Record<any, any>[], immediate
   }
 };
 
+// eslint-disable-next-line no-undef
 let timer: NodeJS.Timeout | null = null;
 export const lazyReport = (type: TrackerUrlType, data: TrackerData, timeout = 3000) => {
   cache.add(data);

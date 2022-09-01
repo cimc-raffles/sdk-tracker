@@ -26,7 +26,8 @@ export default {
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     nodeResolve(),
     babel({
-      babelHelpers: "bundled",
+      // babelHelpers: "bundled",
+      babelHelpers: "runtime",
       extensions: [".js", ".ts"],
       presets: [
         [
@@ -38,6 +39,7 @@ export default {
           },
         ],
       ],
+      plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]]
     }),
   ],
 };

@@ -7,7 +7,7 @@ import behavior from "./behavior";
 
 import UAParser from "ua-parser-js";
 
-const merge = require("deepmerge");
+import merge from "deepmerge";
 
 const getUa = () => {
   const thisua: UAParser.IResult = new UAParser().getResult();
