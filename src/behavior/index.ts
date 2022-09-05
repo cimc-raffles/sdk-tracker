@@ -1,5 +1,6 @@
 import cache from "../services/cache";
 import { report } from "../services/report";
+import config from "../services/config";
 import onClick from "./click";
 
 const send = () => {
@@ -9,8 +10,7 @@ const send = () => {
 };
 
 export default function behavior() {
-  onClick();
-
+  if (config?.trigger === "click") onClick();
   window.addEventListener(
     "beforeunload",
     () => {
@@ -18,7 +18,6 @@ export default function behavior() {
     },
     false,
   );
-
   if ("visibilityState" in document)
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") send();

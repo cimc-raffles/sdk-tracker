@@ -26,7 +26,7 @@ export default class Tracker {
   option: CustomTrackerOption | undefined;
   constructor(option: CustomTrackerOption) {
     this.setConfig(option);
-    error();
+    error(); 
     behavior();
   }
   setConfig(option: CustomTrackerOption) {

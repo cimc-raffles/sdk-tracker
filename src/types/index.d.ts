@@ -12,6 +12,7 @@ export interface CustomTrackerOption extends TrackerOption {
   source?: string;
   size?: number;
   vue?: any;
+  trigger?: string | Record<string, any>;
   getData?: (data: TrackerData) => Record<any, any>;
 }
 
@@ -36,4 +37,8 @@ export interface TrackerUrl {
 
 interface TrackerUrlType {
   type: "behavior" | "visitor" | "error" | "performance";
+}
+
+interface BehaviorTrigger {
+  type: "click" | "router";
 }
