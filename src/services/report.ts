@@ -21,19 +21,21 @@ const send = (url: string, data: string) => {
   else reportWithXHR(url, data);
 };
 
-const convert = (data: Record<any, any>) => {
+const convert = (data: Record<any, any>, isTransformable = true) => {
+  if (!isTransformable) return { timestamp: Date.now(), ...data };
   const computedData = config?.getData ? config.getData(data) : data;
   return computedData ? { timestamp: Date.now(), ...computedData } : false;
 };
 
-export const report = (type: TrackerUrlType, data: Record<any, any>[], immediate = false) => {
+// eslint-disable-next-line max-params
+export const report = (type: TrackerUrlType, data: Record<any, any>[], immediate = false, isTransformable = true) => {
   const errorMessage = "TrackerError: have no request url";
   if (!config?.url) throw new Error(errorMessage);
   const url = typeof config.url === "string" ? config.url : config.url[type.type] || "";
   if (!url.length) throw new Error(errorMessage);
   if (!data.length) return;
   const navigator = config?.navigator;
-  const computedData = data.map((x) => convert({ navigator, ...x })).filter((x) => x);
+  const computedData = data.map((x) => convert({ navigator, ...x }, isTransformable)).filter((x) => x);
   if (!computedData.length) return;
   const body = JSON.stringify(computedData);
   if (immediate) {
@@ -57,13 +59,14 @@ export const report = (type: TrackerUrlType, data: Record<any, any>[], immediate
 
 // eslint-disable-next-line no-undef
 let timer: NodeJS.Timeout | null = null;
-export const lazyReport = (type: TrackerUrlType, data: TrackerData | string, timeout = 3000) => {
-  cache.add(typeof data === "string" ? JSON.parse(data) : data);
+// eslint-disable-next-line max-params
+export const lazyReport = (type: TrackerUrlType, data: TrackerData, isTransformable = true, timeout = 3000) => {
+  cache.add(data);
   if (timer) clearTimeout(timer);
   timer = setTimeout(() => {
     const body = cache.get();
     if (body.length > (config?.size || defaultMaxSize)) {
-      report(type, body);
+      report(type, body, false, isTransformable);
       cache.clear();
     }
   }, timeout);

@@ -5,11 +5,11 @@ import clone from "clone";
 const cache: TrackerData[] = [];
 
 const get = () => {
-  return clone(cache);
+  return cache;
 };
 
 const add = (data: TrackerData) => {
-  cache.push(data);
+  cache.push(clone(data));
 };
 
 const clear = () => {

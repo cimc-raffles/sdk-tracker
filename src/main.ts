@@ -36,7 +36,8 @@ export default class Tracker {
   report(type: TrackerUrlType, data: Record<any, any>[], immediate?: boolean) {
     report(type, data, immediate);
   }
-  lazyReport(type: TrackerUrlType, data: TrackerData | string, timeout?: number) {
-    lazyReport(type, data, timeout);
+  // eslint-disable-next-line max-params
+  lazyReport(type: TrackerUrlType, data: TrackerData, isTransformable: boolean, timeout?: number) {
+    lazyReport(type, data, isTransformable, timeout);
   }
 }

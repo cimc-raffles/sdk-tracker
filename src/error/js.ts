@@ -3,6 +3,7 @@ import { report } from "../services/report";
 import { TrackerErrorData } from "../types";
 
 export default function onJsError() {
+  // eslint-disable-next-line max-params
   window.onerror = (message, url, line, column, error) => {
     const data: TrackerErrorData = {
       category: Category.JsError,
