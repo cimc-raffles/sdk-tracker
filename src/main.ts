@@ -26,7 +26,7 @@ export default class Tracker {
   option: CustomTrackerOption | undefined;
   constructor(option: CustomTrackerOption) {
     this.setConfig(option);
-    error(); 
+    error();
     behavior();
   }
   setConfig(option: CustomTrackerOption) {
@@ -36,7 +36,7 @@ export default class Tracker {
   report(type: TrackerUrlType, data: Record<any, any>[], immediate?: boolean) {
     report(type, data, immediate);
   }
-  lazyReport(type: TrackerUrlType, data: TrackerData, timeout?: number) {
+  lazyReport(type: TrackerUrlType, data: TrackerData | string, timeout?: number) {
     lazyReport(type, data, timeout);
   }
 }
